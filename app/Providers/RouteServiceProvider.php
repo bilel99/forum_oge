@@ -72,6 +72,22 @@ class RouteServiceProvider extends ServiceProvider
         });
 
 
+        /**
+         * FORUM
+         */
+        $router->model('rubrique', 'App\Rubrique', function(){
+            App::abort(500);
+        });
+
+        $router->model('questionForum', 'App\QuestionForum', function(){
+            App::abort(500);
+        });
+
+        $router->model('questionReponse', 'App\QuestionReponse', function(){
+            App::abort(500);
+        });
+
+
 
 
 

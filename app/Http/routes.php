@@ -93,6 +93,10 @@ Route::resource('crons', 'Admin\CronsController');
 // Clears cache
 Route::get('clearsCache', ['as' => 'clearsCache.reset', 'uses' => 'Admin\ClearsCacheController@reset']);
 
+// Rubrique
+Route::resource('rubrique', 'Admin\RubriqueController');
+Route::post('rubriquesearch', ['as' => 'rubrique.search', 'uses' => 'Admin\RubriqueController@search']);
+Route::post('rubrique/{rubrique}', ['as' => 'rubrique.actif', 'uses' => 'Admin\RubriqueController@actif']);
 
 
 

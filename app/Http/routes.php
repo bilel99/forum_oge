@@ -49,7 +49,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'Front\HomePageController@index']);
 Route::get('/administration', ['as' => 'bo', 'uses' => 'Admin\AdminPageController@index']);
 
 
-Route::post('search', ['as' => 'actu.search', 'uses' => 'Admin\ActuController@search']);
+//Route::post('search', ['as' => 'actu.search', 'uses' => 'Admin\ActuController@search']);
 
 
 Route::resource('gestionLanguage', 'Admin\GestionLanguageController');
@@ -99,6 +99,15 @@ Route::post('rubriquesearch', ['as' => 'rubrique.search', 'uses' => 'Admin\Rubri
 Route::post('rubrique/{rubrique}', ['as' => 'rubrique.actif', 'uses' => 'Admin\RubriqueController@actif']);
 
 
+// Sujet du forum
+Route::resource('sujet', 'Admin\SujetController');
+Route::post('sujetsearch', ['as' => 'sujet.search', 'uses' => 'Admin\SujetController@search']);
+Route::post('sujet/{sujet}', ['as' => 'sujet.actif', 'uses' => 'Admin\SujetController@actif']);
+
+// Réponse des sujets
+Route::resource('reponse', 'Admin\ReponseController');
+Route::post('reponsesearch', ['as' => 'reponse.search', 'uses' => 'Admin\ReponseController@search']);
+Route::post('reponse/{reponse}', ['as' => 'reponse.actif', 'uses' => 'Admin\ReponseController@actif']);
 
 
 //AUTHENTICATION

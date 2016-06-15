@@ -79,11 +79,11 @@ class RouteServiceProvider extends ServiceProvider
             App::abort(500);
         });
 
-        $router->model('questionForum', 'App\QuestionForum', function(){
+        $router->model('sujet', 'App\QuestionForum', function(){
             App::abort(500);
         });
 
-        $router->model('questionReponse', 'App\QuestionReponse', function(){
+        $router->model('reponse', 'App\QuestionReponse', function(){
             App::abort(500);
         });
 

@@ -20,16 +20,18 @@ class RubriqueController extends Controller
     {
         /* Recherche */
         $rubrique = \App\Rubrique::
-            where('nom', 'like', '%'.$request->search.'%')
+        where('nom', 'like', '%'.$request->search.'%')
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
         $rubrique->setPath('rubrique');
 
+        $message = "Liste des rubriques !";
         $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
         if($request->ajax()){
             return response()->json([
-                'info'     => $info
+                'info'     => $info,
+                'message' => $message
             ]);
         }
 
@@ -51,10 +53,12 @@ class RubriqueController extends Controller
 
         $rubrique->setPath('rubrique');
 
+        $message = "Liste des rubriques !";
         $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
         if($request->ajax()){
             return response()->json([
-                'info'     => $info
+                'info'     => $info,
+                'message'   => $message
             ]);
         }
         // FIN
@@ -207,6 +211,7 @@ class RubriqueController extends Controller
         $noti->description = '';
         $noti->status = 1;
         $noti->save();
+
 
 
         $info = \App\Rubrique::where('statut', '=', 'Actif')->where('id', '=', $rubrique->id)->get();

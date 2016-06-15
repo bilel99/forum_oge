@@ -10,34 +10,29 @@
 $(document).ready(function(){
 
     var row = $(this).parents('tr');
-    var url = 'rubrique';
+    var url = 'sujet';
 
     $.get(url, function(result){
-        var rowCount = $("#tblCustomers td").closest("tr").length;
-        if(rowCount != 0) {
-            $.each(result.info, function () {
-                if (this.statut == 'Archivé') {
-                    $('#valable_' + this.id).hide();
-                    $('#trash_' + this.id).hide();
-                    $('#valable_' + this.id).toggle();
+        //console.log(result);
+        $.each(result.info, function(){
+            if(this.statut == 'Archivé'){
+                $('#valable_'+this.id).hide();
+                $('#trash_'+this.id).hide();
+                $('#valable_'+this.id).toggle();
 
-                    // Affichage du message avec notiJs
+                // Affichage du message avec notiJs
+                $('#message_info').append(notie.alert(1, result.message, 5));
+            }else if(this.statut == 'Actif'){
+                $('#valable_'+this.id).hide();
+                $('#trash_'+this.id).hide();
+                $('#trash_'+this.id).toggle();
+
+                // Affichage du message avec notiJs
+                if(result.message != null) {
                     $('#message_info').append(notie.alert(1, result.message, 5));
-                } else if (this.statut == 'Actif') {
-                    $('#valable_' + this.id).hide();
-                    $('#trash_' + this.id).hide();
-                    $('#trash_' + this.id).toggle();
-
-                    // Affichage du message avec notiJs
-                    if (result.message != null) {
-                        $('#message_info').append(notie.alert(1, result.message, 5));
-                    }
                 }
-            });
-        }else{
-            // Affichage du message avec notiJs
-            $('#message_info').append(notie.alert(1, result.message, 5));
-        }
+            }
+        });
 
     }).fail(function(){
         sweetAlert('Oups...', 'Une erreur est survenue', 'error');
@@ -56,10 +51,11 @@ $(document).ready(function(){
         var row = $(this).parents('tr');
         var id = row.data('id');
         var form = $('#form-delete');
-        var url = form.attr('action').replace(':RUBRIQUE_ID', id);
+        var url = form.attr('action').replace(':SUJET_ID', id);
         var data = form.serialize();
 
         $.post(url, data, function(result){
+            console.log(result);
             $.each(result.info, function(){
                 $('#statut_'+this.id).html(
                     '<td>'+ this.statut +'</td>');
@@ -100,7 +96,7 @@ $(document).ready(function(){
         var roww = $(this).parents('tr');
         var idd = roww.data('id');
         var formm = $('#form-actif');
-        var urll = formm.attr('action').replace(':RUBRIQUE_ID', idd);
+        var urll = formm.attr('action').replace(':SUJET_ID', idd);
         var dataa = formm.serialize();
 
 

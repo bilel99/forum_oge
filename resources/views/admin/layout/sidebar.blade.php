@@ -140,6 +140,16 @@
         </li>
 
 
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-book"></i> <span>Sujet</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('sujet.index') }}"><i class="fa fa-list"></i>Liste</a></li>
+            </ul>
+        </li>
+
+
 
 
         <li class="treeview">

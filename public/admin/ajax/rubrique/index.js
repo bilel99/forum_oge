@@ -13,31 +13,32 @@ $(document).ready(function(){
     var url = 'rubrique';
 
     $.get(url, function(result){
-        var rowCount = $("#tblCustomers td").closest("tr").length;
-        if(rowCount != 0) {
-            $.each(result.info, function () {
-                if (this.statut == 'Archivé') {
-                    $('#valable_' + this.id).hide();
-                    $('#trash_' + this.id).hide();
-                    $('#valable_' + this.id).toggle();
-
-                    // Affichage du message avec notiJs
-                    $('#message_info').append(notie.alert(1, result.message, 5));
-                } else if (this.statut == 'Actif') {
-                    $('#valable_' + this.id).hide();
-                    $('#trash_' + this.id).hide();
-                    $('#trash_' + this.id).toggle();
-
-                    // Affichage du message avec notiJs
-                    if (result.message != null) {
-                        $('#message_info').append(notie.alert(1, result.message, 5));
-                    }
-                }
-            });
-        }else{
-            // Affichage du message avec notiJs
+        // Affichage du message avec notiJs
+        if(result.message != null) {
             $('#message_info').append(notie.alert(1, result.message, 5));
         }
+
+        $.each(result.info, function () {
+            if (this.statut == 'Archivé') {
+                $('#valable_' + this.id).hide();
+                $('#trash_' + this.id).hide();
+                $('#valable_' + this.id).toggle();
+
+                // Affichage du message avec notiJs
+                if(result.message != null) {
+                    $('#message_info').append(notie.alert(1, result.message, 5));
+                }
+            } else if (this.statut == 'Actif') {
+                $('#valable_' + this.id).hide();
+                $('#trash_' + this.id).hide();
+                $('#trash_' + this.id).toggle();
+
+                // Affichage du message avec notiJs
+                if (result.message != null) {
+                    $('#message_info').append(notie.alert(1, result.message, 5));
+                }
+            }
+        });
 
     }).fail(function(){
         sweetAlert('Oups...', 'Une erreur est survenue', 'error');

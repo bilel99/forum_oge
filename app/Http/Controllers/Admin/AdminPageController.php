@@ -28,8 +28,11 @@ class AdminPageController extends Controller
      */
     public function index()
     {
+        $users = \App\Users::get();
+        $rubrique = \App\Rubrique::get();
+        $sujet = \App\QuestionForum::with('rubrique', 'users')->get();
         // Chargement de la vue
-        return view('admin.bo.index');
+        return view('admin.bo.index', compact('users', 'rubrique', 'sujet'));
     }
 
     /**

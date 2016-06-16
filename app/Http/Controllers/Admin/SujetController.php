@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class SujetController extends Controller
 {
@@ -25,13 +26,22 @@ class SujetController extends Controller
 
         $sujet->setPath('sujet');
 
-        $message = "Liste des sujets !";
-        $info = \App\QuestionForum::with('rubrique', 'users')->orderBy('created_at', 'desc')->get();
-        if($request->ajax()){
-            return response()->json([
-                'info'     => $info,
-                'message' => $message
-            ]);
+        if(count($sujet)==0){
+            $message = "Aucun Sujet !";
+            $info = \App\QuestionForum::with('rubrique', 'users')->orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info,
+                    'message' => $message
+                ]);
+            }
+        }else{
+            $info = \App\QuestionForum::with('rubrique', 'users')->orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info
+                ]);
+            }
         }
 
         return view('admin.sujet.index', compact('sujet'))->render();
@@ -52,13 +62,22 @@ class SujetController extends Controller
 
         $sujet->setPath('sujet');
 
-        $message = "Liste des sujets !";
-        $info = \App\QuestionForum::with('rubrique', 'users')->orderBy('created_at', 'desc')->get();
-        if($request->ajax()){
-            return response()->json([
-                'info'     => $info,
-                'message' => $message
-            ]);
+        if(count($sujet)==0){
+            $message = "Aucun Sujet !";
+            $info = \App\QuestionForum::with('rubrique', 'users')->orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info,
+                    'message' => $message
+                ]);
+            }
+        }else{
+            $info = \App\QuestionForum::with('rubrique', 'users')->orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info
+                ]);
+            }
         }
         // FIN
 
@@ -76,7 +95,8 @@ class SujetController extends Controller
      */
     public function show($sujet)
     {
-        return view('admin.sujet.index', compact('sujet'));
+        $reponse = \App\QuestionReponse::with('questionForum', 'users')->where('id_question_forum', '=', $sujet->id)->orderBy('created_at', 'desc')->get();
+        return view('admin.sujet.show', compact('sujet', 'reponse'));
     }
 
 
@@ -113,6 +133,12 @@ class SujetController extends Controller
         }
         Session::flash('message', $message);
 
+        // Envoie mail à l'utilisateur commentaire supprimer
+        Mail::send('mail.sujetDelete', compact('sujet'), function($message) use ($sujet){
+
+            $message->to($sujet->users->email, '')->subject(Lang::get('general.suscribe_mail_title'));
+        });
+
 
         return redirect()->route('sujet');
     }
@@ -148,6 +174,12 @@ class SujetController extends Controller
             ]);
         }
         Session::flash('message', $message);
+
+        // Envoie mail à l'utilisateur commentaire supprimer
+        Mail::send('mail.sujetActif', compact('sujet'), function($message) use ($sujet){
+
+            $message->to($sujet->users->email, '')->subject(Lang::get('general.suscribe_mail_title'));
+        });
 
 
         return redirect()->route('sujet');

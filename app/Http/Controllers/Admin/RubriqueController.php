@@ -26,14 +26,24 @@ class RubriqueController extends Controller
 
         $rubrique->setPath('rubrique');
 
-        $message = "Liste des rubriques !";
-        $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
-        if($request->ajax()){
-            return response()->json([
-                'info'     => $info,
-                'message' => $message
-            ]);
+        if(count($rubrique) == 0){
+            $message = "Aucune rubrique !";
+            $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info,
+                    'message' => $message
+                ]);
+            }
+        }else{
+            $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info
+                ]);
+            }
         }
+
 
         return view('admin.rubrique.index', compact('rubrique'))->render();
     }
@@ -53,13 +63,22 @@ class RubriqueController extends Controller
 
         $rubrique->setPath('rubrique');
 
-        $message = "Liste des rubriques !";
-        $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
-        if($request->ajax()){
-            return response()->json([
-                'info'     => $info,
-                'message'   => $message
-            ]);
+        if(count($rubrique) == 0){
+            $message = "Aucune rubrique !";
+            $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info,
+                    'message' => $message
+                ]);
+            }
+        }else{
+            $info = \App\Rubrique::orderBy('created_at', 'desc')->get();
+            if($request->ajax()){
+                return response()->json([
+                    'info'     => $info
+                ]);
+            }
         }
         // FIN
 

@@ -14,6 +14,11 @@ $(document).ready(function(){
 
     $.get(url, function(result){
         //console.log(result);
+        // Affichage du message avec notiJs
+        if(result.message != null) {
+            $('#message_info').append(notie.alert(1, result.message, 5));
+        }
+
         $.each(result.info, function(){
             if(this.statut == 'Archivé'){
                 $('#valable_'+this.id).hide();
@@ -21,7 +26,9 @@ $(document).ready(function(){
                 $('#valable_'+this.id).toggle();
 
                 // Affichage du message avec notiJs
-                $('#message_info').append(notie.alert(1, result.message, 5));
+                if(result.message != null) {
+                    $('#message_info').append(notie.alert(1, result.message, 5));
+                }
             }else if(this.statut == 'Actif'){
                 $('#valable_'+this.id).hide();
                 $('#trash_'+this.id).hide();
@@ -55,7 +62,7 @@ $(document).ready(function(){
         var data = form.serialize();
 
         $.post(url, data, function(result){
-            console.log(result);
+            //console.log(result);
             $.each(result.info, function(){
                 $('#statut_'+this.id).html(
                     '<td>'+ this.statut +'</td>');

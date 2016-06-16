@@ -111,7 +111,7 @@
                                         <td>
                                             <!--button type="submit" class="btn btn-danger glyphicon glyphicon-trash " data-toggle="modal" data-target="#{{ $row->id  }}"></button-->
                                             <a type="submit" class="fa fa-eye fa-2x" data-toggle="modal" data-target="#{{ $row->id  }}"></a><br />
-                                            <a class="fa fa-question-circle fa-2x" href="{{ route('reponse.index', $row->id) }}"></a><br />
+                                            <a class="fa fa-question-circle fa-2x" href="{{ route('sujet.show', $row->id) }}"></a><br />
                                             <!-- AJAX Change status, 1 ou 0 'Actif'|'Inactif' -->
 
                                             <div id="trash_<?=$row->id?>" style="display: none;">

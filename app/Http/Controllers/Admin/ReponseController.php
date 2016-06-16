@@ -6,81 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReponseController extends Controller
 {
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index($id, Request $request)
-    {
-        /* Recherche */
-        $reponse = \App\QuestionReponse::with('questionForum', 'users')
-            ->where('id_question_forum', '=', $id)
-            ->where('description', 'like', '%'.$request->search.'%')
-            ->orderBy('created_at', 'desc')
-            ->paginate(12);
-
-        $reponse->setPath('reponse');
-
-        $message = 'Liste des reponses';
-        $info = \App\QuestionReponse::with('questionForum', 'users')->orderBy('created_at', 'desc')->get();
-        if($request->ajax()){
-            return response()->json([
-                'info'     => $info,
-                'message'   => $message
-            ]);
-        }
-
-        return view('admin.sujet.reponse', compact('reponse'))->render();
-    }
-
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\View\View
-     */
-    public function search($id, Request $request){
-
-        /* Recherche */
-        $reponse = \App\QuestionReponse::with('questionForum', 'users')
-            ->where('id_question_forum', '=', $id)
-            ->where('description', 'like', '%'.$request->search.'%')
-            ->orderBy('created_at', 'desc')
-            ->paginate(12);
-
-        $reponse->setPath('reponse');
-
-        $message = 'Liste des reponses';
-        $info = \App\QuestionReponse::with('questionForum', 'users')->orderBy('created_at', 'desc')->get();
-        if($request->ajax()){
-            return response()->json([
-                'info'     => $info,
-                'message'   => $message
-            ]);
-        }
-        // FIN
-
-
-        return view('admin.sujet.reponse', compact('reponse'))->render();
-    }
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($reponse)
-    {
-        return view('admin.sujet.show', compact('reponse'));
-    }
-
 
     /**
      * Remove the specified resource from storage.
@@ -92,7 +21,6 @@ class ReponseController extends Controller
     {
         $reponse->delete();
 
-
         // Alimentation de la table notificationHistory
         $noti = new \App\NotificationHistory;
         $noti->id_users = Auth::user()->id;
@@ -101,7 +29,6 @@ class ReponseController extends Controller
         $noti->description = '';
         $noti->status = 1;
         $noti->save();
-
 
         $info = \App\QuestionReponse::where('id', '=', $reponse->id)->get();
         $message = "suppression effectué avec succès";
@@ -114,8 +41,12 @@ class ReponseController extends Controller
         }
         Session::flash('message', $message);
 
+        // Envoie mail à l'utilisateur commentaire supprimer
+        Mail::send('mail.reponse_deleted', compact('reponse'), function($message) use ($reponse){
 
-        return redirect()->route('reponse');
+            $message->to($reponse->users->email, '')->subject(Lang::get('general.suscribe_mail_title'));
+        });
+
     }
 
 }

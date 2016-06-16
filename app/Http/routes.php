@@ -106,8 +106,6 @@ Route::post('sujet/{sujet}', ['as' => 'sujet.actif', 'uses' => 'Admin\SujetContr
 
 // Réponse des sujets
 Route::resource('reponse', 'Admin\ReponseController');
-Route::post('reponsesearch', ['as' => 'reponse.search', 'uses' => 'Admin\ReponseController@search']);
-Route::post('reponse/{reponse}', ['as' => 'reponse.actif', 'uses' => 'Admin\ReponseController@actif']);
 
 
 //AUTHENTICATION

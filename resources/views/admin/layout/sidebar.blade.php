@@ -14,7 +14,7 @@
         <div class="pull-left info">
             <p>{{substr(Auth::user()->nom, 0, 1)}} {{Auth::user()->prenom}}</p>
 
-            <a href=""><i class="fa fa-circle text-success"></i> Retour sur le site web</a>
+            <a href="{{route('home')}}"><i class="fa fa-circle text-success"></i> Retour sur le site web</a>
         </div>
     </div>
     <!-- search form -->

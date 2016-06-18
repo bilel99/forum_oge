@@ -1,6 +1,7 @@
 @extends('front.layout.home')
 @section('content')
 	
+
 <div id="wrapper">
 
 <header>
@@ -29,15 +30,15 @@
             	<div class="row">
             		<div class="col-md-3">
             			<div class="row">
-            				<div class="col-md-12">
-            					<a href="{{route('home')}}"><strong>Toutes les rubriques</strong></a>
-            				</div>
-            				@foreach($rubrique as $row)
-            				<div class="col-md-12">
-            					<a href="{{route('rubrique/index', $row->id)}}">{{$row->nom}}</a>
-            				</div>
-            				@endforeach
-            			</div>
+                            <div class="col-md-12">
+                                <a href="{{route('home')}}"><strong>Toutes les rubriques</strong></a>
+                            </div>
+                            @foreach($rubrique as $row)
+                            <div class="col-md-12">
+                                <a href="{{route('rubrique/index', $row->id)}}">{{$row->nom}}</a>
+                            </div>
+                            @endforeach
+                        </div>
             		</div>
             		<div class="col-md-9">
             			@foreach($question_forum as $row)

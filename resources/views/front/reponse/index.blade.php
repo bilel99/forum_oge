@@ -26,24 +26,25 @@
             			
             		</div>
             	</div>
+
+                
+                <div class="col-md-12" style="margin-bottom: 20px">
+                    {{$question_reponse[0]->questionForum->nom}}
+                </div>
+                              
+
             	<div class="row">
             		<div class="col-md-3">
             			<div class="row">
-            				<div class="col-md-12">
-            					<a href="{{route('home')}}"><strong>Toutes les rubriques</strong></a>
-            				</div>
-            				@foreach($rubrique as $row)
-            				<div class="col-md-12">
-            					<a href="{{route('rubrique/index', $row->id)}}">{{$row->nom}}</a>
-            				</div>
-            				@endforeach
-            			</div>
+                            <div class="col-md-12">
+                            
+                            </div>    
+                        </div>
             		</div>
             		<div class="col-md-9">
-            			@foreach($question_forum as $row)
+            			@foreach($question_reponse as $row)
             				<div class="col-md-12" style="margin-bottom: 20px">
-            					<strong>{{$row->nom}}</strong><br>
-            					{{$row->rubrique->nom}} par <strong>{{$row->users->nom}}</strong><br>
+            					<strong>{{$row->users->nom}}</strong><br>
             					{{$row->description}}
             				</div>
             			@endforeach

@@ -12,3 +12,4 @@ class Rubrique extends Model
         return date('d/m/Y H\Hi', date_timestamp_get(date_create($this->created_at)));
     }
 }
+

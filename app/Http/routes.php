@@ -21,19 +21,20 @@ Route::post('password/email', array('as' => 'password/email', 'uses' => 'Front\R
 Route::get('password/reset', array('as' => 'password/reset', 'uses' => 'Front\RootController@getReset'));
 Route::post('password/reset', array('as' => 'password/reset', 'uses' => 'Front\RootController@postReset'));
 
-
-
+// Home Routes
 Route::get('/', ['as' => 'home', 'uses' => 'Front\HomePageController@index']);
 
+//Rubriques Route
+Route::get('rubrique/{id}', ['as' => 'rubrique/index', 'uses' => 'Front\RubriqueController@index']);
 
+//Reponse Route
+Route::get('reponse/{id}', ['as' => 'reponse/index', 'uses' => 'Front\ReponseController@index']);
 
+//Creation Sujet Route
+Route::get('question/index', ['as' => 'question/index', 'uses' => 'Front\QuestionController@index']);
+Route::post('question/store', ['as' => 'question/store', 'uses' => 'Front\QuestionController@store']);
 
-
-
-
-
-
-
+// Creation Reponse Route
 
 
 

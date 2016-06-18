@@ -44,15 +44,15 @@ class EnvoieMailsController extends Controller
 
         foreach($users as $key=>$row){
             $mail = $row->email;
-            $email[] = $ficelle->trimQuote($row->email);
-            $listEmail[] = implode(',', $email);
+            //$email[] = $ficelle->trimQuote($row->email);
+            //$listEmail[] = implode(',', $email);
         }
 
-        var_dump($listEmail);
-        dd('pause');
+        //var_dump($listEmail);
+        //dd('pause');
         // Envoie du mail
-        Mail::send('mail.emails', ['sujet' => \Input::get('sujet'), 'objet' => \Input::get('objet'), 'exp' => \Input::get('exp'), 'message' => \Input::get('message')], function($message) use ($listEmail, $email, $mail){
-            $message->to($email, '')->subject(Lang::get('general.suscribe_mail_title'));
+        Mail::send('mail.emails', ['sujet' => \Input::get('sujet'), 'objet' => \Input::get('objet'), 'exp' => \Input::get('exp'), 'message' => \Input::get('message')], function($message) use ($mail){
+            $message->to($mail, '')->subject(Lang::get('general.suscribe_mail_title'));
         });
 
 

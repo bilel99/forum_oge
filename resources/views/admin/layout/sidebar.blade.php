@@ -14,7 +14,7 @@
         <div class="pull-left info">
             <p>{{substr(Auth::user()->nom, 0, 1)}} {{Auth::user()->prenom}}</p>
 
-            <a href=""><i class="fa fa-circle text-success"></i> Retour sur le site web</a>
+            <a href="{{route('home')}}"><i class="fa fa-circle text-success"></i> Retour sur le site web</a>
         </div>
     </div>
     <!-- search form -->
@@ -123,6 +123,29 @@
                         <li><a href="{{ route('langues.create') }}"><i class="fa fa-plus-circle"></i>Ajouter</a></li>
                     </ul>
                 </li>
+            </ul>
+        </li>
+
+
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-star-o"></i> <span>Rubrique</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('rubrique.index') }}"><i class="fa fa-list"></i>Liste</a></li>
+                <li><a href="{{ route('rubrique.create') }}"><i class="fa fa-plus-circle"></i>Ajouter</a></li>
+            </ul>
+        </li>
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-book"></i> <span>Sujet</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('sujet.index') }}"><i class="fa fa-list"></i>Liste</a></li>
             </ul>
         </li>
 

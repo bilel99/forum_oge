@@ -50,7 +50,7 @@ Route::post('question/store', ['as' => 'question/store', 'uses' => 'Front\Questi
 Route::get('/administration', ['as' => 'bo', 'uses' => 'Admin\AdminPageController@index']);
 
 
-Route::post('search', ['as' => 'actu.search', 'uses' => 'Admin\ActuController@search']);
+//Route::post('search', ['as' => 'actu.search', 'uses' => 'Admin\ActuController@search']);
 
 
 Route::resource('gestionLanguage', 'Admin\GestionLanguageController');
@@ -94,8 +94,19 @@ Route::resource('crons', 'Admin\CronsController');
 // Clears cache
 Route::get('clearsCache', ['as' => 'clearsCache.reset', 'uses' => 'Admin\ClearsCacheController@reset']);
 
+// Rubrique
+Route::resource('rubrique', 'Admin\RubriqueController');
+Route::post('rubriquesearch', ['as' => 'rubrique.search', 'uses' => 'Admin\RubriqueController@search']);
+Route::post('rubrique/{rubrique}', ['as' => 'rubrique.actif', 'uses' => 'Admin\RubriqueController@actif']);
 
 
+// Sujet du forum
+Route::resource('sujet', 'Admin\SujetController');
+Route::post('sujetsearch', ['as' => 'sujet.search', 'uses' => 'Admin\SujetController@search']);
+Route::post('sujet/{sujet}', ['as' => 'sujet.actif', 'uses' => 'Admin\SujetController@actif']);
+
+// Réponse des sujets
+Route::resource('reponse', 'Admin\ReponseController');
 
 
 //AUTHENTICATION

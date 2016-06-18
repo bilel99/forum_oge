@@ -21,9 +21,10 @@ class HomePageController extends Controller
         if(!isset(Auth::user()->email)){
             return view('auth.index');
         }else{
-            return view('front.fo.index');
+            $rubrique = \App\Rubrique::get();
+            $question_forum = \App\QuestionForum::with('rubrique', 'users')->get();
+            return view('front.fo.index', compact('rubrique', 'question_forum'));
         }
-
     }
 
     /**

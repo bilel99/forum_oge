@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use Dates;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,6 +11,17 @@ use Illuminate\Support\Facades\Auth;
 
 class HomePageController extends Controller
 {
+
+    /**
+     * @return Dates
+     */
+    public static function instanced(){
+        $dates = new Dates();
+        return $dates;
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *

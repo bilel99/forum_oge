@@ -71,7 +71,7 @@
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <div class="well well-lg">
-                                                                        <h4 class="media-heading text-uppercase reviews">Kriztine</h4>
+                                                                        <h4 class="media-heading text-uppercase reviews">{{substr($row->users->nom, 0, 1)}} {{$row->users->prenom}}</h4>
                                                                         <ul class="media-date text-uppercase reviews list-inline">
                                                                             <li class="dd">{{\App\Http\Controllers\Admin\AdminPageController::instanced()->formatDateComplete($row->created_at)}}</li>
                                                                         </ul>

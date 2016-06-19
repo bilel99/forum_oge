@@ -30,9 +30,15 @@ class QuestionController extends Controller
 	public function store(QuestionRequest $request)
     {
         $question = new \App\QuestionForum;
-        $question->create($request->all());
+        $question->id_rubrique = $request->id_rubrique;
+        $question->id_users = $request->id_users;
+        $question->nom = $request->nom;
+        $question->description = $request->description;
+        $question->statut = 1;
+        $question->valider = 0;
+        $question->save();
 
-        return redirect('')->withFlashMessage("");
+        return redirect()->back()->withFlashMessage("Création effectué avec succès");
     } 
 
 }

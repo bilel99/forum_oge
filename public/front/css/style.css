@@ -119,6 +119,7 @@ section {
   #info-bar span.all-tutorials,
   #info-bar span.back-to-tutorial {
     display: block;
+    color: #fff;
     width: 50%; }
   #info-bar span.all-tutorials {
     float: left;

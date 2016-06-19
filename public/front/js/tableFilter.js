@@ -14,9 +14,16 @@ $(document).ready(function () {
     $('.btn-filter').on('click', function () {
         var $target = $(this).data('target');
         if ($target != 'all') {
-            $('.table tr').css('display', 'none');
-            $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+            if($('.table tr[data-status="' + $target + '"]').length == 0){
+                $('.table tr').css('display', 'none');
+                $('.aucun').fadeIn('slow');
+            }else{
+                $('.aucun').fadeOut('slow');
+                $('.table tr').css('display', 'none');
+                $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+            }
         } else {
+            $('.aucun').fadeOut('slow');
             $('.table tr').css('display', 'none').fadeIn('slow');
         }
     });

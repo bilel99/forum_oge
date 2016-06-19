@@ -29,15 +29,19 @@ Route::get('rubrique/{id}', ['as' => 'rubrique/index', 'uses' => 'Front\Rubrique
 
 //Reponse Route
 Route::get('reponse/{id}', ['as' => 'reponse/index', 'uses' => 'Front\ReponseController@index']);
+Route::post('reponse/store', ['as' => 'reponse/store', 'uses' => 'Front\ReponseController@store']);
+Route::post('reponse/{id}', ['as' => 'reponse.delete', 'uses' => 'Front\ReponseController@destroy']);
+Route::post('reponse/updateSujet/{sujet}', ['as' => 'reponse.updateSujet', 'uses' => 'Front\ReponseController@updateSujet']);
+
 
 //Creation Sujet Route
 Route::get('question/index', ['as' => 'question/index', 'uses' => 'Front\QuestionController@index']);
 Route::post('question/store', ['as' => 'question/store', 'uses' => 'Front\QuestionController@store']);
 
-// Creation Reponse Route
 
-
-
+// Gestion Compte Route
+Route::get('compte/index', ['as' => 'compte/index', 'uses' => 'Front\CompteController@index']);
+Route::put('compte/update/{users}', ['as' => 'compte/update', 'uses' => 'Front\CompteController@update']);
 
 
 

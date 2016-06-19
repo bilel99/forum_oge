@@ -1,63 +1,56 @@
 @extends('front.layout.home')
 @section('content')
-	
-
-<div id="wrapper">
-
-<header>
-    <div class="container clearfix">
-        <h1 id="logo">
-            Forum Oge
-        </h1>
-        <nav>
-            <a href="">Accueil</a>
-        </nav>
-    </div>
-</header><!-- /header -->
 
 <div id="main">
     <div id="content">
+
+		<div>
+			@include('admin.layout.error')
+			@include('admin.layout.errors_request')
+			@include('admin.layout.success')
+
+			<script src="{{ asset('plugins/notificationJs/notie.js') }}" type="text/javascript"></script>
+			<div id="message_info"></div>
+
+		</div>
+
         <section>
             <div class="container">
             	<div class="row">
-            		<div class="col-md-3">
-            			Utilisateur
-            		</div>
-            		<div class="col-md-9">
+            		<div class="col-md-12">
             			{!! Form::open(array('route'=>'question/store', 'class' => 'form-horizontal')) !!}
 							<fieldset>
 								{!! Form::hidden('id_users', Auth::user()->id, array('class'=>'form-control', 'name'=>'id_users')) !!}
 								<!-- Select Rubrique -->
 								<div class="form-group">  	
-								  	{!! Form::label('id_rubrique', 'Rubrique :', ['class'=>'col-md-4 control-label', 'for'=>'id_rubrique']) !!}
-									<div class="col-md-4">
+								  	{!! Form::label('id_rubrique', 'Rubrique', ['class'=>'col-md-12 control-label', 'for'=>'id_rubrique']) !!}
+									<div class="col-md-12">
 								  		{!! Form::select('id_rubrique', $rubriques, '', ['class'=>'form-control']) !!}
 									</div>
 								</div>
 
 								<!-- Titre input-->
 								<div class="form-group">
-								  	{!! Form::label('nom', 'Titre :', ['class'=>'col-md-4 control-label', 'for'=>'nom']) !!}  
-								  	<div class="col-md-4">				  		
-								  		{!! Form::input('texte', 'nom', null, ['class' => 'form-control input-md', 'name'=>'nom', 'placeholder' => 'titre', 'required'=>'required'])!!}
+								  	{!! Form::label('nom', 'Titre', ['class'=>'col-md-12 control-label', 'for'=>'nom']) !!}
+								  	<div class="col-md-12">
+										{!! Form::text('nom', '', array('class'=>'form-control', 'name'=>'nom', 'placeholder' => 'nom', 'required'=>'required')) !!}
 								  	</div>
 								</div>
 
 								<!-- Question input-->
 								<div class="form-group">
-								  	{!! Form::label('description', 'Question :', ['class'=>'col-md-4 control-label', 'for'=>'description']) !!}  
-								  	<div class="col-md-4">
-								  		{!! Form::input('texte', 'description', null, ['class' => 'form-control input-md', 'name'=>'description', 'placeholder' => 'question', 'required'=>'required'])!!}	
-								  	</div>
+								  	{!! Form::label('description', 'Question', ['class'=>'col-md-12 control-label', 'for'=>'description']) !!}
+								  	<div class="col-md-12">
+										{!! Form::textarea('description', '', array('class'=>'form-control', 'name'=>'description', 'placeholder' => 'description')) !!}
+									</div>
 								</div>
 
-								<!-- Button -->
 								<div class="form-group">
-								  	{!! Form::label('validation', 'Validation :', ['class'=>'col-md-4 control-label', 'for'=>'validation']) !!}
-							  		<div class="col-md-8">
-							    		<button id="valider" tyme="submit" name="valider" class="btn btn-success">Valider</button>
-							    		<button id="annuler" name="annuler" class="btn btn-danger">Annuler</button>
-							  		</div>
+									<div class="row">
+										<div class="col-sm-11 col-sm-offset-1">
+											<input type="submit" name="submit" id="submit" class="form-control btn btn-register" value="CREATE">
+										</div>
+									</div>
 								</div>
 							</fieldset>
 						{!!  Form::close() !!}
@@ -68,17 +61,20 @@
     </div>
 </div><!-- #main -->
 
-
-<footer>
-<div id="info-bar">
-    <div class="container clearfix">
-        <span class="all-tutorials"><a href="http://bootsnipp.com/cppratikcp">← all tutorials</a></span>
-        <span class="back-to-tutorial"><a href="https://www.facebook.com/pratik.chauhan.cp">CHUAHAN PRATIK</a></span>
-    </div>
-</div><!-- /#top-bar -->
-</footer><!-- /footer -->
-
-
-
-</div><!-- /#wrapper -->
 @stop
+
+
+<!-- TINY MCE -->
+<script src='//cdn.tinymce.com/4/tinymce.min.js'></script><script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
+
+<script type="text/javascript">
+	tinymce.init({
+		selector: "textarea",
+		plugins: [
+			"advlist autolink lists link image charmap print preview anchor",
+			"searchreplace visualblocks code fullscreen",
+			"insertdatetime media table contextmenu paste"
+		],
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+	});
+</script>

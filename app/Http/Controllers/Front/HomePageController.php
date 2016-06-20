@@ -33,8 +33,8 @@ class HomePageController extends Controller
         if(!isset(Auth::user()->email)){
             return view('auth.index');
         }else{
-            $rubrique = \App\Rubrique::get();
-            $question_forum = \App\QuestionForum::with('rubrique', 'users')->get();
+            $rubrique = \App\Rubrique::where('statut', '=', 'Actif')->get();
+            $question_forum = \App\QuestionForum::with('rubrique', 'users')->where('statut', '=', 'Actif')->get();
             return view('front.fo.index', compact('rubrique', 'question_forum'));
         }
     }

@@ -74,6 +74,9 @@
                                         <div class="col-lg-12">
                                             <p>
                                                 <a href="{{route('root.logout')}}" class="btn btn-danger btn-block">Déconnexion</a>
+                                                @if(Auth::user()->id_roles_users == 2)
+                                                    <a href="{{route('bo')}}" class="btn btn-default btn-block">Retour sur le Back Office</a>
+                                                @endif
                                             </p>
                                         </div>
                                     </div>

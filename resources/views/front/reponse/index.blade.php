@@ -95,24 +95,24 @@
             		</div>
 
                         @foreach($sujet as $row)
-                            {!! Form::open(array('route'=>'reponse/store', 'class' => 'form-horizontal')) !!}
-                                <!-- Reponse input-->
-                                {!! Form::hidden('id_question_forum', $row->id, array('class'=>'form-control', 'name'=>'id_question_forum')) !!}
-                                <div class="form-group">
-                                    {!! Form::label('reponse', 'Ajouté votre réponse', ['class'=>'col-md-12 control-label', 'for'=>'reponse']) !!}
-                                    <div class="col-md-12">
-                                        {!! Form::textarea('reponse', '', array('class'=>'form-control', 'name'=>'reponse', 'placeholder' => 'Ajouté votre Réponse au sujet')) !!}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-11 col-sm-offset-1">
-                                            <input type="submit" name="submit" id="submit" class="form-control btn btn-register" value="CREATE">
+                                {!! Form::open(array('route'=>'reponse/store', 'class' => 'form-horizontal')) !!}
+                                    <!-- Reponse input-->
+                                    {!! Form::hidden('id_question_forum', $row->id, array('class'=>'form-control', 'name'=>'id_question_forum')) !!}
+                                    <div class="form-group">
+                                        {!! Form::label('reponse', 'Ajouté votre réponse', ['class'=>'col-md-12 control-label', 'for'=>'reponse']) !!}
+                                        <div class="col-md-12">
+                                            {!! Form::textarea('reponse', '', array('class'=>'form-control', 'name'=>'reponse', 'placeholder' => 'Ajouté votre Réponse au sujet')) !!}
                                         </div>
                                     </div>
-                                </div>
-                            {!!  Form::close() !!}
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-11 col-sm-offset-1">
+                                                <input type="submit" name="submit" id="submit" class="form-control btn btn-register" value="CREATE">
+                                            </div>
+                                        </div>
+                                    </div>
+                                {!!  Form::close() !!}
                         @endforeach
 
                    </fieldset>

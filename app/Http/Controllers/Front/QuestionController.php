@@ -18,7 +18,7 @@ class QuestionController extends Controller
      */
 	public function index(){
         $rubriques = \App\Rubrique::lists('nom', 'id');
-		return view('front.question.index', compact('rubriques', 'question_forum'));
+		return view('front.question.index', compact('rubriques'));
 	}
 
 	/**
